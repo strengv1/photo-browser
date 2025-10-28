@@ -6,8 +6,8 @@ const IMAGE_REPLACE_API_BASE = "https://picsum.photos"
 export const replaceBrokenLinks = (p: Photo) => {
   return {
     ...p,
-    thumbnailUrl: `${IMAGE_REPLACE_API_BASE}/seed/${p.id}/150`,
-    url: `${IMAGE_REPLACE_API_BASE}/seed/${p.id}/600/400`
+    thumbnailUrl: `${IMAGE_REPLACE_API_BASE}/seed/${p.id}/150.webp`,
+    url: `${IMAGE_REPLACE_API_BASE}/seed/${p.id}/600/400.webp`
   }
 }
 

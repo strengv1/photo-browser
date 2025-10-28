@@ -1,82 +1,63 @@
-import Button from "./Button"
+import { Link, useSearchParams } from "react-router-dom"
+import PaginationButton from "./PaginationButton";
 
-interface PaginationButtonProps {
-  isActive?: boolean
-  page: number
-  handleClick: () => void
-}
+export default function PaginationButtons() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const photosPerPage = Number(searchParams.get("limit")) || 20;
 
-const PaginationButton = ({
-  isActive = false,
-  page,
-  handleClick
-}: PaginationButtonProps) => (
-  <Button
-    className={`${isActive ? "bg-gray-700 text-white" : ""}`}
-    onClick={handleClick}
-  >
-    {page}
-  </Button>
-)
-
-
-interface PaginationProps {
-  currentPage: number
-  goToPage: (page: number) => void
-  photosPerPage: number
-  setPhotosPerPage: (newCount: number) => void
-}
-
-export default function PaginationButtons({
-  currentPage,
-  goToPage,
-  photosPerPage,
-  setPhotosPerPage
-}: PaginationProps) {
-  
   const renderPaginationLinks = () => {
     const links = []
     
-    links.push(
-      <Button
-        key="previous"
-        onClick={() => goToPage(currentPage - 1)}
-        disabled={currentPage <= 1}
-      >
-        {`< `}
-        <span className="hidden md:inline-block">Previous</span>
-      </Button>
-    )
+    if (currentPage > 1) {
+      links.push(
+        <Link
+          key="previous"
+          to={`?page=${currentPage-1}&limit=${photosPerPage}`}
+        >
+          {`< `}
+          <span className="hidden md:inline-block">Previous</span>
+        </Link>
+      )
+    }
 
     links.push(
-      <PaginationButton key={1} isActive={currentPage===1} page={1} handleClick={() => goToPage(1)} />
+      <PaginationButton
+        key={1}
+        isActive={currentPage===1}
+        page={1}
+        photosPerPage={photosPerPage}
+      />
     )
     
     if (currentPage > 2) {
       links.push(
-        <button key="ellipsis_left">...</button>
+        <span key="ellipsis_left">...</span>
       )
     }
     
     for (let i = Math.max(2, currentPage - 1); i <= currentPage + 1; i++) {
       if (i === 1) continue
       links.push(
-        <PaginationButton key={i} isActive={currentPage === i} page={i} handleClick={() => goToPage(i)} />
+        <PaginationButton
+          key={i}
+          isActive={currentPage === i}
+          page={i}
+          photosPerPage={photosPerPage}
+        />
       )
     }
     
     links.push(
-      <button key="ellipsis_right">...</button>
+      <span key="ellipsis_right">...</span>
     )
 
     links.push(
-      <Button
-        key="next"
-        onClick={() => goToPage(currentPage + 1)}
-      >
+      <Link key="next" to={`?page=${currentPage+1}&limit=${photosPerPage}`}>
         <span className="hidden md:inline-block">Next</span>
         {` >`}
-      </Button>
+      </Link>
+      
     )
     return links
   }
@@ -88,8 +69,11 @@ export default function PaginationButtons({
         <select
           value={photosPerPage}
           onChange={(e) => {
-            setPhotosPerPage(Number(e.target.value))
-            goToPage(1)
+            const newLimit = Number(e.target.value);
+            setSearchParams({
+              page: "1",
+              limit: newLimit.toString()
+            });
           }}
           className="h-8 px-2 py-1 rounded-md border "
         >
@@ -98,6 +82,7 @@ export default function PaginationButtons({
           <option value={50}>50</option>
           <option value={100}>100</option>
         </select>
+
         <span className="text-xs sm:text-sm">
           per page
         </span>

@@ -1,6 +1,20 @@
 import type { Photo } from "../lib/types"
 import PhotoCard from "./PhotoCard"
 
+interface PhotoGallerySkeletonProps {
+  expectedPhotoCount: number
+}
+
+function PhotoGallerySkeleton({ expectedPhotoCount }: PhotoGallerySkeletonProps) {
+  return (
+    <>
+      {Array.from({ length: expectedPhotoCount }).map((_, idx) => (
+        <div key={idx} className="w-[150px] h-[150px] rounded bg-gray-200 animate-pulse" />
+      ))}
+    </>
+  )
+}
+
 interface PhotoGalleryProps {
   photos: Photo[]
   isLoading?: boolean
@@ -13,9 +27,7 @@ export default function PhotoGallery({ photos, isLoading = false, expectedPhotoC
   if (isLoading) {
     return (
       <div className={gridClasses} >
-        {Array.from({ length: expectedPhotoCount }).map((_, idx) => (
-          <div key={idx} className="w-[150px] h-[150px] rounded bg-gray-200 animate-pulse" />
-        ))}
+        <PhotoGallerySkeleton expectedPhotoCount={expectedPhotoCount} />
       </div>
     )
   }
@@ -27,7 +39,7 @@ export default function PhotoGallery({ photos, isLoading = false, expectedPhotoC
           <PhotoCard key={idx} photo={p} />
         ))
       ) : (
-        <div className="col-span-2 sm:col-span-4 lg:col-span-6 text-center">No Photos To Show</div>
+        <PhotoGallerySkeleton expectedPhotoCount={expectedPhotoCount} />
       )}
     </div>
   )

@@ -1,23 +1,35 @@
-import { Link, useParams } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
+import { useParams } from "react-router-dom"
 import { useState } from "react"
 import { usePhoto } from "../hooks/usePhoto"
 
 export default function ImageView() {
+  const navigate = useNavigate();
+
   const { id } = useParams()
-  const { photo, isFetching, error } = usePhoto(id)
+  const { photo, album, user, isFetching, error } = usePhoto(id)
   const [imgLoaded, setImgLoaded] = useState(false)
 
   if (!id) return null
-
+  
   return (
     <div className="container">
       <div className="w-full flex">
-        <Link to="/" className="text-blue-700 font-semibold">
-          &lt; Back
-        </Link>
+        <button
+          className="border border-black rounded px-2 cursor-pointer"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button>
       </div>
 
       {error && <p className="text-red-600">Error: {error}</p>}
+
+      <div>
+        Belongs to album: {album?.title}
+        <br />
+        Which belongs to user: {user?.name}
+      </div>
 
       <div className="flex items-center justify-center">
         {isFetching || !photo ? (
