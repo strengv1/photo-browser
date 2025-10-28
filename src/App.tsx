@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import PaginationButtons from './components/PaginationButtons'
 
 interface Photo {
   albumId: number
@@ -43,33 +44,18 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Photo Browser</h1>
+      <h1 className="text-lg font-bold mb-4">Photo Browser</h1>
 
-      {/* Page selector */}
-      <div className="flex gap-2 items-center">
-        <span className="text-sm hidden sm:inline-block ">
-          Show
-        </span>
-        <select
-          value={photosPerPage}
-          onChange={(e) => {
-            setPhotosPerPage(Number(e.target.value))
-            setCurrentPage(1)
-          }}
-          className="h-8 px-2 py-1 rounded-md border text-sm "
-        >
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-          <option value={100}>100</option>
-        </select>
-        <span className="text-xs sm:text-sm">
-          per page
-        </span>
-      </div>
+      {/* Page Selector Top */}
+      <PaginationButtons
+        currentPage={currentPage}
+        goToPage={setCurrentPage}
+        photosPerPage={photosPerPage}
+        setPhotosPerPage={setPhotosPerPage}
+      />
 
       {/* Photo grid */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 place-items-center">
         {(visiblePhotos.length > 0) ?
             visiblePhotos.map((photo, idx) => (
               <img key={idx}
@@ -77,11 +63,18 @@ function App() {
                 alt={photo.id.toString()}
               />
             ))
-
           :
-          <div>error</div>
+          <div>No Photos To Show</div>
         }
       </div>
+
+      {/* Page selector Bottom */}
+      <PaginationButtons
+        currentPage={currentPage}
+        goToPage={setCurrentPage}
+        photosPerPage={photosPerPage}
+        setPhotosPerPage={setPhotosPerPage}
+      />
 
     </div>
   )
