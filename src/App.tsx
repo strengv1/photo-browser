@@ -10,7 +10,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1)
   const [photosPerPage, setPhotosPerPage] = useState(20)
 
-  const { photos, isLoading, error } = usePhotos(currentPage, photosPerPage)
+  const { photos, isLoadingMetadata, error } = usePhotos(currentPage, photosPerPage)
 
   return (
     <div className="container">
@@ -25,10 +25,10 @@ function App() {
 
       {error && <p className="text-red-600">{error}</p>}
 
-      {isLoading ? (
-        <div>Loading..</div>
+      {isLoadingMetadata ? (
+        <PhotoGallery photos={[]} isLoading={true} expectedPhotoCount={photos.length}/>
       ) : (
-        <PhotoGallery photos={photos} />
+        <PhotoGallery photos={photos} isLoading={isLoadingMetadata}/>
       )}
 
       <PaginationButtons

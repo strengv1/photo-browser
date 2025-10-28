@@ -28,5 +28,5 @@ export function usePhotos(page: number, limit: number) {
     return () => controller.abort()
   }, [page, limit])
 
-  return { photos, isLoading, error }
+  return { photos, isLoadingMetadata: isLoading, error }
 }
