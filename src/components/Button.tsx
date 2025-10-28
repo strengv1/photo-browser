@@ -11,7 +11,7 @@ export default function Button({
   className,
   ...props
 }: ButtonProps) {
-  const baseClasses = "border border-black rounded-md cursor-pointer px-2 disabled:text-gray-700 disabled:bg-gray-100 disabled:border-gray-700";
+  const baseClasses = "border border-black rounded-md cursor-pointer px-2 disabled:cursor-auto disabled:text-gray-600 disabled:bg-gray-200 disabled:border-gray-600";
 
   return (
     <button

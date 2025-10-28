@@ -12,13 +12,13 @@ const PaginationButton = ({
   handleClick
 }: PaginationButtonProps) => (
   <Button
-    key={page}
     className={`${isActive ? "bg-gray-700 text-white" : ""}`}
     onClick={handleClick}
   >
     {page}
   </Button>
 )
+
 
 interface PaginationProps {
   currentPage: number
@@ -39,6 +39,7 @@ export default function PaginationButtons({
     
     links.push(
       <Button
+        key="previous"
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage <= 1}
       >
@@ -46,9 +47,9 @@ export default function PaginationButtons({
         <span className="hidden md:inline-block">Previous</span>
       </Button>
     )
-    // Always show first page
+
     links.push(
-      <PaginationButton isActive={currentPage===1} page={1} handleClick={() => goToPage(1)} />
+      <PaginationButton key={1} isActive={currentPage===1} page={1} handleClick={() => goToPage(1)} />
     )
     
     if (currentPage > 2) {
@@ -57,11 +58,10 @@ export default function PaginationButtons({
       )
     }
     
-    // Add pages around current page
     for (let i = Math.max(2, currentPage - 1); i <= currentPage + 1; i++) {
       if (i === 1) continue
       links.push(
-        <PaginationButton isActive={currentPage === i} page={i} handleClick={() => goToPage(i)} />
+        <PaginationButton key={i} isActive={currentPage === i} page={i} handleClick={() => goToPage(i)} />
       )
     }
     
@@ -71,6 +71,7 @@ export default function PaginationButtons({
 
     links.push(
       <Button
+        key="next"
         onClick={() => goToPage(currentPage + 1)}
       >
         <span className="hidden md:inline-block">Next</span>
@@ -81,18 +82,16 @@ export default function PaginationButtons({
   }
 
   return (
-    <div className="flex flex-col md:flex-row my-8 gap-2 items-center justify-center">
-      <div className="flex gap-2 items-center">
-        <span className="text-sm hidden sm:inline-block ">
-          Show
-        </span>
+    <div className="relative flex flex-col gap-2 sm:gap-0 sm:flex-row my-8 items-center sm:justify-end">
+      <div className="flex items-center gap-1 text-sm">
+        Show
         <select
           value={photosPerPage}
           onChange={(e) => {
             setPhotosPerPage(Number(e.target.value))
             goToPage(1)
           }}
-          className="h-8 px-2 py-1 rounded-md border text-sm "
+          className="h-8 px-2 py-1 rounded-md border "
         >
           <option value={10}>10</option>
           <option value={20}>20</option>
@@ -104,7 +103,7 @@ export default function PaginationButtons({
         </span>
       </div>
 
-      <div className="flex gap-2 mx-auto">
+      <div className="sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2 flex gap-2">
         {renderPaginationLinks()}
       </div>
     </div>
