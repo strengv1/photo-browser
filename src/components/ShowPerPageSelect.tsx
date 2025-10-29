@@ -21,7 +21,7 @@ export default function ShowPerPageSelect() {
         className="h-8 px-2 py-1 rounded-md border "
       >
         {allowedLimits.map((lim) => (
-          <option value={lim}>{lim}</option>
+          <option key={lim} value={lim}>{lim}</option>
         ))}
       </select>
 

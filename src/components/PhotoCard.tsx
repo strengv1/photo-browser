@@ -13,7 +13,7 @@ export default function PhotoCard({ photo }: PhotoCardProps) {
   return (
     <Link
       to={`/image/${photo.id}`}
-      className="relative w-[150px] h-[150px] rounded"
+      className="relative w-full aspect-square rounded"
     >
       {!imageLoaded && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse" />

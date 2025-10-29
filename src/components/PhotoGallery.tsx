@@ -9,7 +9,7 @@ function PhotoGallerySkeleton({ expectedPhotoCount }: PhotoGallerySkeletonProps)
   return (
     <>
       {Array.from({ length: expectedPhotoCount }).map((_, idx) => (
-        <div key={idx} className="w-[150px] h-[150px] rounded bg-gray-200 animate-pulse" />
+        <div key={idx} className="w-full aspect-square rounded bg-gray-200 animate-pulse" />
       ))}
     </>
   )
@@ -22,7 +22,7 @@ interface PhotoGalleryProps {
 }
 
 export default function PhotoGallery({ photos, isLoading = false, expectedPhotoCount = 10 }: PhotoGalleryProps) {
-  const gridClasses = "grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 place-items-center"
+  const gridClasses = "grid grid-cols-[repeat(auto-fill,150px)] gap-4 place-items-center justify-center"
   
   if (isLoading) {
     return (
