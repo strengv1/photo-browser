@@ -12,3 +12,14 @@ export const fetchAlbum = async (albumId: number, signal?: AbortSignal) => {
 
   return album;
 };
+
+export const fetchUserAlbums = async (userId: number, signal?: AbortSignal) => {
+  const res = await fetch(`${API_BASE}?userId=${userId}`, { signal });
+  if (!res.ok) {
+    throw new Error("Failed to fetch albums");
+  }
+
+  const albums: Album[] = await res.json();
+
+  return albums;
+};

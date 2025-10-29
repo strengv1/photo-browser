@@ -11,8 +11,8 @@ function App() {
   const currentPage = Math.max(1, Number(searchParams.get("page")) || 1);
   const limitParams = Number(searchParams.get("limit")) || 20;
   const allowedLimits = [10, 20, 50, 100]
-
   const photosPerPage = allowedLimits.includes(limitParams) ? limitParams : 20
+  
   useEffect(() => {
     setSearchParams({
       page: currentPage.toString(),
@@ -24,9 +24,7 @@ function App() {
   const { photos, isLoadingMetadata, error } = usePhotos(currentPage, photosPerPage);
   
   return (
-    <div className="container">
-      <h1 className="text-lg font-bold mb-4">Photo Browser</h1>
-      
+    <>
       <PaginationButtons />
       
       {error && <p className="text-red-600">{error}</p>}
@@ -38,7 +36,7 @@ function App() {
       )}
       
       <PaginationButtons />
-    </div>
+    </>
   )
 }
 
