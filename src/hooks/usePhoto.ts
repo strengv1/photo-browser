@@ -21,7 +21,7 @@ export function usePhoto(id?: string) {
       setError(null)
 
       try {
-        const photoData = await fetchSinglePhoto(id, controller.signal)
+        const photoData = await fetchSinglePhoto(parseInt(id, 10), controller.signal)
         setPhoto(photoData)
 
         const albumData = await fetchAlbum(photoData.albumId, controller.signal)

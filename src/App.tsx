@@ -4,13 +4,13 @@ import './App.css'
 import PaginationButtons from './components/PaginationButtons'
 import PhotoGallery from './components/PhotoGallery'
 import { usePhotos } from "./hooks/usePhotos"
+import { allowedLimits } from './components/ShowPerPageSelect'
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
   
   const currentPage = Math.max(1, Number(searchParams.get("page")) || 1);
   const limitParams = Number(searchParams.get("limit")) || 20;
-  const allowedLimits = [10, 20, 50, 100]
   const photosPerPage = allowedLimits.includes(limitParams) ? limitParams : 20
   
   useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
       limit: photosPerPage.toString()
     }, { replace: true });
   
-  }, [searchParams, currentPage, photosPerPage, setSearchParams]);
+  }, []);
   
   const { photos, isLoadingMetadata, error } = usePhotos(currentPage, photosPerPage);
   

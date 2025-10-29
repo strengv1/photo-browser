@@ -24,7 +24,7 @@ export const fetchPhotos = async (page: number, limit: number, signal?: AbortSig
 };
 
 
-export const fetchSinglePhoto = async (id: string, signal?: AbortSignal) => {
+export const fetchSinglePhoto = async (id: number, signal?: AbortSignal) => {
   const res = await fetch(`${API_BASE}/${id}`, { signal });
 
   if (!res.ok) {
