@@ -12,13 +12,13 @@ export default function UserPage() {
     <div>
       {error && <p className="text-red-600">Error: {error}</p>}
       
-      {isFetching ? (
-       <div className="animate-pulse flex flex-col items-center">
+      {isFetching || !user ? (
+       <div className="animate-pulse flex flex-col items-center" aria-hidden="true">
           <div className="h-7 w-48 bg-gray-300 mb-4" />
           <div className="h-4 w-64 bg-gray-300 mb-2" />
           <div className="h-4 w-52 bg-gray-300" />
         </div>
-      ) : user ? (
+      ) : (
         <div>
           <h2 className="text-xl font-bold mb-2">{user.name}</h2>
           <p>Email: {user.email}</p>
@@ -33,7 +33,7 @@ export default function UserPage() {
             ))}
           </div>
         </div>
-      ) : <div>No User Found</div>}
+      )}
     </div>
   )
 }

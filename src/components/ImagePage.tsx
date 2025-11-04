@@ -33,14 +33,14 @@ export default function ImagePage() {
       
       <div className="flex items-center justify-center">
         {isFetching || !photo ? (
-          <div className="h-[400px] w-[600px] animate-pulse bg-gray-300" />
+          <div className="h-[400px] w-[600px] animate-pulse bg-gray-300" aria-hidden="true" />
         ) : (
           <div className="relative h-[400px] w-[600px]">
             {!imgLoaded && (
-              <div className="absolute inset-0 animate-pulse bg-gray-300" />
+              <div className="absolute inset-0 animate-pulse bg-gray-300" aria-hidden="true" />
             )}
             <img
-              alt={photo.title || "image"}
+              alt={photo.title || `Image ${photo.id}`}
               src={photo.url}
               className={`transition-opacity duration-300 rounded-lg ${
                 imgLoaded ? "opacity-100" : "opacity-0"

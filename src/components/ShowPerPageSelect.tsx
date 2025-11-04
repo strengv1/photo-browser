@@ -1,15 +1,20 @@
 import { useSearchParams } from "react-router-dom";
+import { useId } from "react";
 
 export const allowedLimits = [10, 20, 50, 100]
 
 export default function ShowPerPageSelect() {
   const [ searchParams, setSearchParams ] = useSearchParams();
   const photosPerPage = Number(searchParams.get("limit")) || 20;
-
+  const id = useId();
+  
   return (
     <div className="flex items-center gap-1 text-sm">
-      Show
+      <label htmlFor={id}>
+        Show
+      </label>
       <select
+        id={id}
         value={photosPerPage}
         onChange={(e) => {
           const newLimit = Number(e.target.value);
@@ -24,7 +29,6 @@ export default function ShowPerPageSelect() {
           <option key={lim} value={lim}>{lim}</option>
         ))}
       </select>
-
       <span className="text-xs sm:text-sm">
         per page
       </span>

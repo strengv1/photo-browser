@@ -16,15 +16,16 @@ export default function PhotoCard({ photo }: PhotoCardProps) {
       className="relative w-full aspect-square rounded-lg"
     >
       {!imageLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" aria-hidden="true" />
       )}
       <img
         src={photo.thumbnailUrl}
-        alt={photo.id.toString()}
+        alt={photo.title || photo.id.toString()}
         className={`w-full rounded-lg transition-opacity duration-100 ${
           imageLoaded ? "opacity-100" : "opacity-0"
         }`}
         onLoad={() => setImageLoaded(true)}
+        loading="lazy"
       />
     </Link>
   )

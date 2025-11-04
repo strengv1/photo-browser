@@ -9,7 +9,11 @@ function PhotoGallerySkeleton({ expectedPhotoCount }: PhotoGallerySkeletonProps)
   return (
     <>
       {Array.from({ length: expectedPhotoCount }).map((_, idx) => (
-        <div key={idx} className="w-full aspect-square rounded-lg bg-gray-200 animate-pulse" />
+        <div
+          key={idx}
+          className="w-full aspect-square rounded-lg bg-gray-200 animate-pulse"
+          aria-hidden="true"
+        />
       ))}
     </>
   )
