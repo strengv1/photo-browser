@@ -7,7 +7,7 @@ export default function DetailLayout() {
     <>
       <div className="w-full flex mb-4">
         <button
-          className="border border-black rounded px-2 cursor-pointer"
+          className="border border-black rounded-lg px-2 cursor-pointer bg-white"
           onClick={() => navigate(-1)}
         >
           Back

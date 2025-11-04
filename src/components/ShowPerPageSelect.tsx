@@ -18,7 +18,7 @@ export default function ShowPerPageSelect() {
             limit: newLimit.toString()
           });
         }}
-        className="h-8 px-2 py-1 rounded-md border "
+        className="h-8 px-2 py-1 rounded-lg border bg-white"
       >
         {allowedLimits.map((lim) => (
           <option key={lim} value={lim}>{lim}</option>

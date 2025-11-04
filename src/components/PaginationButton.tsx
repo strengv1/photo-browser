@@ -15,8 +15,8 @@ export default function PaginationButton({
     <Link key={page}
       to={`?page=${page}&limit=${photosPerPage}`}
       className={`
-        border border-black rounded-md cursor-pointer px-2
-        ${isActive ? "bg-gray-700 text-white" : ""}
+        border border-black rounded-lg cursor-pointer px-2
+        ${isActive ? "bg-gray-700 text-white" : "bg-white"}
       `}
     >
       {page}

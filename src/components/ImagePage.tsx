@@ -42,9 +42,7 @@ export default function ImagePage() {
             <img
               alt={photo.title || "image"}
               src={photo.url}
-              height={400}
-              width={600}
-              className={`transition-opacity duration-500 ${
+              className={`transition-opacity duration-300 rounded-lg ${
                 imgLoaded ? "opacity-100" : "opacity-0"
               }`}
               onLoad={() => setImgLoaded(true)}

@@ -27,7 +27,7 @@ export default function UserPage() {
           <h3 className="text-lg font-semibold mt-6 mb-3">Albums</h3>
           <div className="grid gap-4">
             {albums?.map((album: Album) => (
-              <div key={album.id} className="border p-4 rounded">
+              <div key={album.id} className="border p-4 rounded-lg">
                 <h4 className="font-medium">{album.title}</h4>
               </div>
             ))}
