@@ -3,7 +3,7 @@ import type { Album, User } from '../lib/types'
 import { fetchUser } from '../services/userService'
 import { fetchUserAlbums } from '../services/albumService'
 
-export function useUser(userId: number) {
+export function useUser(userId?: number) {
   const [user, setUser] = useState<User | null>(null)
   const [albums, setAlbums] = useState<Album[]>([])
   const [isFetching, setIsFetching] = useState(true)

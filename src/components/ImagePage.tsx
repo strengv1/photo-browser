@@ -9,11 +9,15 @@ export default function ImagePage() {
   const [imgLoaded, setImgLoaded] = useState(false)
   
   if (!id) return null
-  
+
+  if (error){
+    return (
+      <p className="text-red-600">{error || "Unknown error"}</p>
+    )
+  }
+
   return (
     <>
-      {error && <p className="text-red-600">Error: {error}</p>}
-      
       <div className="mb-4">
         <p>Belongs to album: {album?.title}</p>
         <p>

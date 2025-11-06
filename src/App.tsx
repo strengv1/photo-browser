@@ -4,7 +4,7 @@ import './App.css'
 import PaginationButtons from './components/PaginationButtons'
 import PhotoGallery from './components/PhotoGallery'
 import { usePhotos } from "./hooks/usePhotos"
-import { allowedLimits } from './components/ShowPerPageSelect'
+import { allowedLimits } from './lib/types'
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,16 +18,19 @@ function App() {
       page: currentPage.toString(),
       limit: photosPerPage.toString()
     }, { replace: true });
-  
-  }, []);
+  }, [currentPage, photosPerPage, setSearchParams]);
   
   const { photos, isLoadingMetadata, error } = usePhotos(currentPage, photosPerPage);
   
+  if (error){
+    return (
+      <p className="text-red-600">{error || "Unknown error"}</p>
+    )
+  }
+
   return (
     <>
       <PaginationButtons />
-      
-      {error && <p className="text-red-600">{error}</p>}
       
       {isLoadingMetadata ? (
         <PhotoGallery photos={[]} isLoading={true} expectedPhotoCount={photosPerPage}/>

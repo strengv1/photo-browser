@@ -41,3 +41,5 @@ export interface User {
   address: Address
   company: Company
 }
+
+export const allowedLimits = [10, 20, 50, 100]

@@ -1,7 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { useId } from "react";
-
-export const allowedLimits = [10, 20, 50, 100]
+import { allowedLimits } from "../lib/types";
 
 export default function ShowPerPageSelect() {
   const [ searchParams, setSearchParams ] = useSearchParams();

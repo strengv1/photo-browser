@@ -36,14 +36,16 @@ export default function PhotoGallery({ photos, isLoading = false, expectedPhotoC
     )
   }
   
+  if (photos.length <= 0) {
+    return (
+      <p>No Photos Available</p>
+    )
+  }
+
   return (
     <div className={gridClasses} >
-      {photos.length > 0 ? (
-        photos.map((p, idx) => (
-          <PhotoCard key={idx} photo={p} />
-        ))
-      ) : (
-        <PhotoGallerySkeleton expectedPhotoCount={expectedPhotoCount} />
+      {photos.map(
+        (p, idx) => <PhotoCard key={idx} photo={p} />
       )}
     </div>
   )
